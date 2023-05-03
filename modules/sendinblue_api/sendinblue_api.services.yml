@@ -1,0 +1,4 @@
+services:
+  sendinblue_api:
+    class: Drupal\sendinblue_api\Service\SendinblueApi
+    arguments: ['@cache.default', '@config.factory', '@current_user', '@logger.factory', '@messenger', '@settings', '@http_client', '@module_handler']

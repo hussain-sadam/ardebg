@@ -1,0 +1,14 @@
+sendinblue_api.config:
+  route_name: sendinblue_api.config
+  title: "API Config"
+  base_route: sendinblue_api.config
+
+sendinblue_api.lists:
+  route_name: sendinblue_api.lists
+  title: "Lists"
+  base_route: sendinblue_api.config
+
+sendinblue_api.fields:
+  route_name: sendinblue_api.fields
+  title: "Custom Fields"
+  base_route: sendinblue_api.config

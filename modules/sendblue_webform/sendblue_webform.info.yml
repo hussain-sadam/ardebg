@@ -1,0 +1,4 @@
+name: Sendblue Webform
+description: Sends webform email using Sendinblue API.
+type: module
+core_version_requirement: ^9 | ^10

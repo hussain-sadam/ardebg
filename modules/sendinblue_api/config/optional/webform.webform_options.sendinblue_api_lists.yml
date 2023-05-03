@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - sendinblue_api
+id: sendinblue_api_lists
+label: "Sendinblue API List(s)"
+category: General
+likert: false
+options: ""

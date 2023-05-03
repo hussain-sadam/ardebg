@@ -1,0 +1,3 @@
+administer sendinblue api configuration:
+  title: "Administer Sendinblue API Configuration"
+  restrict access: TRUE

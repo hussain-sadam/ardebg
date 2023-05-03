@@ -1,0 +1,88 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+use GuzzleHttp\Client;
+
+/**
+ * Implements hook_form_alter().
+ */
+function sendblue_webform_form_alter(&$form, &$form_state, $form_id) {
+ 
+    if ($form_id == 'webform_submission_contact_add_form') {
+        $form['actions']['submit']['#submit'][] = 'sendblue_webform_webform_submission_contact_add_form_submit';
+      }
+
+
+}
+
+function sendblue_webform_webform_submission_contact_add_form_submit(array &$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+    
+    
+
+    // Perform your custom action here before the webform is saved.
+   echo $email = $form_state->getValue('email');
+     $fname = @$form_state->getValue('name');
+    $lname = @$form_state->getValue('ming');  
+     $name = @$fname.' '.@$lname;
+    $toName = @$name;
+    $toEmail = 'sadamfreelancer@gmail.com';
+    $fromName = '阿貝團隊';
+    $fromEmail = 'no-reply@ardbeg.com.tw';
+    
+    
+    $subject = '歡迎來到您的 ARDventure！';
+    //Get node
+    // Load the node with ID 7 of type "Webform Email".
+$node = \Drupal\node\Entity\Node::load(7);
+if ($node && $node->getType() == 'webform_email') {
+  // Get the title of the node.
+  $title = $node->getTitle();
+$subject = $title;
+  // Get the body field text of the node.
+  $body = $node->get('body')->value;
+
+  // Replace {{username}} with $xyz in the body text.
+  $body = str_replace('{{fname}}', $fname, $body);
+   $htmlMessage = str_replace('{{lname}}', $lname, $body);
+}else{ 
+    
+    $htmlMessage = '<table class="full" bgcolor="#fff" width="100%" border="0" align="center" cellpadding="0" cellspacing="0"><tbody><tr><td align="center"><table class="table-inner" width="480" style="max-width: 480px;" border="0" align="center" cellpadding="0" cellspacing="0"><tbody><tr><td height="10"></td></tr><tr><td align="center" style="line-height:0;"><img style="width:100%" src="http://ardbeg.wipsite.live/sites/default/files/2023-05/email-header.jpg"></td></tr></tbody></table></td></tr></tbody></table><table class="full" bgcolor="#fff" width="100%" border="0" align="center" cellpadding="0" cellspacing="0"><tbody><tr><td align="center"><table class="table-inner" align="center" width="480" style="max-width: 480px;" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="background-image: url(http://ardbeg.wipsite.live/sites/default/files/2023-04/brown-bg.jpg);background-size:cover" align="center"><table width="90%" border="0" align="center" cellpadding="0" cellspacing="0"><tbody><tr><td height="35"></td></tr><tr><td align="center" style="font-family: Open sans, Arial, sans-serif; color:#000; font-size:22px;">嗨 '.@$name.'，<br><br>歡迎來到您的 ARDventure！<br><br>請訪問我們<br><br>兌換您的免費 Ardbeg 頭巾！*<br><br>真摯地，<br>阿貝團隊</td></tr><tr><td height="30"></td></tr><tr><td align="center" style="font-family: Open sans, Arial, sans-serif; color:#000; font-size:14px; line-height: 28px;"> *售完即止 </td></tr><tr><td height="45"></td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>';
+}
+    $data = array(
+        "sender" => array(
+            "email" => $fromEmail,
+            "name" => $fromName
+        ),
+        "to" => array(
+            array(
+                "email" => $email,
+                "name" => $toName
+                )
+        ),
+        "subject" => $subject,
+        "htmlContent" => '<html><head></head><body><p>'.$htmlMessage.'</p></p></body></html>'
+    );
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://api.sendinblue.com/v3/smtp/email');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    $headers = array();
+    $headers[] = 'Accept: application/json';
+    $headers[] = 'Api-Key: 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';
+
+
+    $headers[] = 'Content-Type: application/json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    }
+ 
+
+    // *********  EMAIL API END **********************
+  }

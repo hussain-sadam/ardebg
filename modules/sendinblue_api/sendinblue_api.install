@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the sendinblue_api module.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function sendinblue_api_requirements($phase)
+{
+  $requirements = [];
+  if ($phase == 'install') {
+    if (!class_exists('\SendinBlue\Client\Api\ContactsApi')) {
+      $requirements['sendinblue_library'] = [
+        'description' => t('Sendinblue requires the sendinblue/api-v3-sdk library.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+  }
+
+  return $requirements;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function sendinblue_api_uninstall()
+{
+  Drupal::configFactory()->getEditable('sendinblue_api')->delete();
+}

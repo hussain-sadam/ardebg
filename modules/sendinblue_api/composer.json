@@ -1,0 +1,25 @@
+{
+    "name": "drupal/sendinblue_api",
+    "description": "Drupal 8 Module for Sendinblue API",
+    "type": "drupal-module",
+    "keywords": ["Drupal", "Third-Party Services", "Sendinblue API", "Rest"],
+    "homepage": "https://www.drupal.org/project/sendinblue_api",
+    "license": "GPL-2.0-or-later",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/sendinblue_api",
+        "source": "https://www.drupal.org/project/sendinblue_api"
+    },
+    "authors": [
+        {
+            "name": "Sujan Shrestha (sujan-shrestha)",
+            "homepage": "https://www.drupal.org/u/sujan-shrestha",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "php": "^7.3 || ^8.0",
+        "drupal/core": "^9.2 || ^10",
+        "sendinblue/api-v3-sdk": "^7.4"
+    }
+}
+

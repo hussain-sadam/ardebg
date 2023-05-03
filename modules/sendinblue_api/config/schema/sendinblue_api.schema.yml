@@ -1,0 +1,13 @@
+webform.handler.sendinblue_api:
+  type: mapping
+  label: "Sendinblue API"
+  mapping:
+    list:
+      type: string
+      label: "List"
+    email:
+      type: string
+      label: "Email"
+    mergevars:
+      type: text
+      label: "Merge fields (YAML)"

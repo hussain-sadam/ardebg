@@ -1,0 +1,36 @@
+sendinblue_api.config:
+  path: "/admin/config/services/sendinblue-api"
+  defaults:
+    _form: '\Drupal\sendinblue_api\Form\SendinblueApiConfig'
+    _title: "Sendinblue API"
+  requirements:
+    _permission: "administer sendinblue api configuration"
+  options:
+    _admin_route: TRUE
+sendinblue_api.lists:
+  path: "/admin/config/services/sendinblue-api/lists"
+  defaults:
+    _form: '\Drupal\sendinblue_api\Form\SendinblueApiLists'
+    _title: "Sendinblue API Available Lists"
+  requirements:
+    _permission: "administer sendinblue api configuration"
+  options:
+    _admin_route: TRUE
+
+sendinblue_api.fields:
+  path: "/admin/config/services/sendinblue-api/fields"
+  defaults:
+    _controller: '\Drupal\sendinblue_api\Controller\CustomFieldsController::content'
+    _title: "Sendinblue API Available Custom Fields"
+  requirements:
+    _permission: "administer sendinblue api configuration"
+  options:
+    _admin_route: TRUE
+
+sendinblue_api.authentication_callback:
+  path: "/admin/config/services/sendinblue-api/callback"
+  defaults:
+    _controller: '\Drupal\sendinblue_api\Controller\AuthenticationCallback::callbackUrl'
+  methods: [GET]
+  requirements:
+    _permission: "administer sendinblue api configuration"

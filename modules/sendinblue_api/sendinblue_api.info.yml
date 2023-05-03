@@ -1,0 +1,14 @@
+name: Sendinblue - Digital Marketing Tools
+description: Integrates Sendinblue API API v3.
+package: Sendinblue
+type: module
+configure: sendinblue_api.config
+core_version_requirement: ^9.2 || ^10
+depencencies:
+  - drupal:block
+  - drupal:rest
+
+# Information added by Drupal.org packaging script on 2023-04-27
+version: '1.1.4'
+project: 'sendinblue_api'
+datestamp: 1682580727

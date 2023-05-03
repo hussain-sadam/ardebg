@@ -1,0 +1,6 @@
+sendinblue_api.config:
+  title: "Sendinblue API"
+  route_name: sendinblue_api.config
+  description: "Sendinblue API integration settings"
+  parent: system.admin_config_services
+  weight: 99
